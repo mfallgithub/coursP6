@@ -1,11 +1,14 @@
 const express = require('express');
-const router = express.Router();
+//importer notre middeware
+const auth = require('../middleware/auth');
 //Importer le controller
 const stuffCtrl = require('../controllers/stuff');
+const router = express.Router();
+
 //appel de la route du controller
-router.post('/', stuffCtrl.createThing);
-router.put('/:id', stuffCtrl.modifyThing);
-router.delete('/:id',stuffCtrl.deleteThing);
-router.get('/:id', stuffCtrl.getOneThing);
-router.get('/', stuffCtrl.getAllThings);
+router.post('/', auth, stuffCtrl.createThing);
+router.put('/:id', auth, stuffCtrl.modifyThing);
+router.delete('/:id', auth, stuffCtrl.deleteThing);
+router.get('/:id', auth, stuffCtrl.getOneThing);
+router.get('/', auth, stuffCtrl.getAllThings);
 module.exports = router;

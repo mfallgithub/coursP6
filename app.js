@@ -3,7 +3,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+
+//import des routes
 const stuffRoutes=require('./routes/stuff');
+const userRoutes=require('./routes/user');
+
+//la connexion à la base MongoDB
 mongoose.connect('mongodb+srv://mfalluser:iymzagp0MWVnLxVn@atlascluster.4dm1h.mongodb.net/?retryWrites=true&w=majority',
   {
     useNewUrlParser: true,
@@ -21,4 +26,5 @@ app.use((req, res, next) => {
 });
 
 app.use('/api/stuff',stuffRoutes);
+app.use('/api/auth', userRoutes);
 module.exports = app;
